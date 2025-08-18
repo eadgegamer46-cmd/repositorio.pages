@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sistema de Vendas e Estoque</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Tela de Login -->
+  <div class="container" id="loginScreen">
+    <h1>Login</h1>
+    <input type="text" id="user" placeholder="Usuário" />
+    <input type="password" id="password" placeholder="Senha" />
+    <button id="loginBtn">Entrar</button>
+    <p class="hint">Use qualquer usuário e senha para entrar (protótipo).</p>
+  </div>
+
+  <!-- Painel Principal -->
+  <div class="container hidden" id="homeScreen">
+    <h1>Painel Principal</h1>
+    <div class="grid">
+      <button id="toSalesBtn">Registrar Venda</button>
+      <button id="toStockBtn">Controle de Estoque</button>
+      <button id="toReportsBtn">Relatórios</button>
+    </div>
+    <button id="logoutBtn" class="secondary">Sair</button>
+  </div>
+
+  <!-- Tela de Vendas -->
+  <div class="container hidden" id="salesScreen">
+    <h1>Registrar Venda</h1>
+    <input type="text" id="saleProduct" placeholder="Produto" />
+    <input type="number" id="saleQty" placeholder="Quantidade" min="1" />
+    <button id="addSaleBtn">Salvar Venda</button>
+    <ul id="salesList"></ul>
+    <button class="secondary" id="backFromSalesBtn">Voltar</button>
+  </div>
+
+  <!-- Tela de Estoque -->
+  <div class="container hidden" id="stockScreen">
+    <h1>Controle de Estoque</h1>
+    <input type="text" id="stockProduct" placeholder="Produto" />
+    <input type="number" id="stockQty" placeholder="Quantidade" min="1" />
+    <button id="addStockBtn">Adicionar ao Estoque</button>
+    <ul id="stockList"></ul>
+    <button class="secondary" id="backFromStockBtn">Voltar</button>
+  </div>
+
+  <!-- Tela de Relatórios -->
+  <div class="container hidden" id="reportsScreen">
+    <h1>Relatórios</h1>
+    <h2>📊 Vendas</h2>
+    <ul id="reportSales"></ul>
+    <h2>📦 Estoque</h2>
+    <ul id="reportStock"></ul>
+    <button class="secondary" id="backFromReportsBtn">Voltar</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

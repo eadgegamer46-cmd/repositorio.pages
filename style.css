@@ -1,0 +1,51 @@
+/* Tema preto + cinza claro, layout simples e robusto */
+:root{
+  --bg:#121212; --card:#1e1e1e; --text:#f2f2f2; --muted:#a8a8a8; --btn:#444; --btn-hover:#666;
+  --border:#333;
+}
+*{box-sizing:border-box}
+html,body{height:100%;}
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  margin:0;
+  color: var(--text);
+  display:flex; align-items:center; justify-content:center; padding:24px;
+}
+.container{
+  background: var(--card);
+  width:min(540px, 100%);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:24px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.35);
+}
+h1,h2{margin:0 0 16px}
+input{
+  width:100%;
+  padding:12px 14px;
+  margin:8px 0;
+  border-radius:10px;
+  border:1px solid var(--border);
+  background:#2a2a2a;
+  color:var(--text);
+  outline:none;
+}
+button{
+  width:100%;
+  padding:12px 14px;
+  border:none;
+  border-radius:10px;
+  background: var(--btn);
+  color: var(--text);
+  font-weight:700;
+  cursor:pointer;
+  transition: background .2s ease;
+  margin:6px 0;
+}
+button:hover{ background: var(--btn-hover); }
+button.secondary{ background:#2b2b2b; }
+.grid{ display:grid; grid-template-columns: 1fr; gap:10px; }
+.hint{ color: var(--muted); font-size:.9rem; margin-top:8px; }
+ul{margin:10px 0 0 0; padding-left:18px}
+.hidden{ display:none !important; }
