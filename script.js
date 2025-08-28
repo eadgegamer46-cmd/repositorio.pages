@@ -1,12 +1,9 @@
-// Sistema Web de Vendas e Estoque
-// Robusto: usa eventos do DOM, ids específicos e localStorage persistente
 
 const state = {
   sales: [],
   stock: []
 };
 
-// Util: salvar/carregar
 function saveData() {
   localStorage.setItem('sales', JSON.stringify(state.sales));
   localStorage.setItem('stock', JSON.stringify(state.stock));
@@ -21,14 +18,10 @@ function loadData() {
   }
 }
 
-// Navegação entre telas
 function showScreen(id) {
   document.querySelectorAll('.container').forEach(el => el.classList.add('hidden'));
   const target = document.getElementById(id);
-  if (!target) {
-    console.error('Tela não encontrada:', id);
-    return;
-  }
+  if (!target) return;
   target.classList.remove('hidden');
 
   if (id === 'stockScreen') renderStock();
@@ -36,45 +29,31 @@ function showScreen(id) {
   if (id === 'reportsScreen') renderReports();
 }
 
-// Renderizações
 function renderSales() {
   const ul = document.getElementById('salesList');
   if (!ul) return;
-  if (state.sales.length === 0) {
-    ul.innerHTML = '<li>Nenhuma venda registrada.</li>';
-    return;
-  }
-  ul.innerHTML = state.sales
-    .map(s => `<li>${escapeHTML(s.product)} - ${s.qty} un. (${s.date})</li>`)
-    .join('');
+  ul.innerHTML = state.sales.length === 0
+    ? '<li>Nenhuma venda registrada.</li>'
+    : state.sales.map(s => `<li>${escapeHTML(s.product)} - ${s.qty} un. (${s.date})</li>`).join('');
 }
 function renderStock() {
   const ul = document.getElementById('stockList');
   if (!ul) return;
-  if (state.stock.length === 0) {
-    ul.innerHTML = '<li>Nenhum item em estoque.</li>';
-    return;
-  }
-  ul.innerHTML = state.stock
-    .map(s => `<li>${escapeHTML(s.product)} - ${s.qty} un.</li>`)
-    .join('');
+  ul.innerHTML = state.stock.length === 0
+    ? '<li>Nenhum item em estoque.</li>'
+    : state.stock.map(s => `<li>${escapeHTML(s.product)} - ${s.qty} un.</li>`).join('');
 }
 function renderReports() {
   const rSales = document.getElementById('reportSales');
   const rStock = document.getElementById('reportStock');
-  if (rSales) {
-    rSales.innerHTML = state.sales.length
-      ? state.sales.map(s => `<li>${escapeHTML(s.product)} - ${s.qty} un. (${s.date})</li>`).join('')
-      : '<li>Sem vendas registradas.</li>';
-  }
-  if (rStock) {
-    rStock.innerHTML = state.stock.length
-      ? state.stock.map(s => `<li>${escapeHTML(s.product)} - ${s.qty} un.</li>`).join('')
-      : '<li>Sem estoque disponível.</li>';
-  }
+  if (rSales) rSales.innerHTML = state.sales.length
+    ? state.sales.map(s => `<li>${escapeHTML(s.product)} - ${s.qty} un. (${s.date})</li>`).join('')
+    : '<li>Sem vendas registradas.</li>';
+  if (rStock) rStock.innerHTML = state.stock.length
+    ? state.stock.map(s => `<li>${escapeHTML(s.product)} - ${s.qty} un.</li>`).join('')
+    : '<li>Sem estoque disponível.</li>';
 }
 
-// Ações
 function addSale() {
   const productEl = document.getElementById('saleProduct');
   const qtyEl = document.getElementById('saleQty');
@@ -86,7 +65,6 @@ function addSale() {
     return;
   }
 
-  // Verificar estoque
   const item = state.stock.find(x => x.product.toLowerCase() === product.toLowerCase());
   if (!item || item.qty < qty) {
     alert('Estoque insuficiente para esta venda.');
@@ -114,11 +92,8 @@ function addStock() {
   }
 
   const item = state.stock.find(x => x.product.toLowerCase() === product.toLowerCase());
-  if (item) {
-    item.qty += qty;
-  } else {
-    state.stock.push({ product, qty });
-  }
+  if (item) item.qty += qty;
+  else state.stock.push({ product, qty });
 
   saveData();
   productEl.value = '';
@@ -126,7 +101,6 @@ function addStock() {
   renderStock();
 }
 
-// Helpers
 function escapeHTML(str) {
   if (typeof str !== 'string') return '';
   return str.replace(/[&<>'"]/g, s =>
@@ -134,56 +108,49 @@ function escapeHTML(str) {
   );
 }
 
-// Inicialização
 document.addEventListener('DOMContentLoaded', () => {
-  // Carregar dados
   loadData();
 
-  // Botões / eventos
   document.getElementById('loginBtn')?.addEventListener('click', () => showScreen('homeScreen'));
   document.getElementById('logoutBtn')?.addEventListener('click', () => showScreen('loginScreen'));
-
   document.getElementById('toSalesBtn')?.addEventListener('click', () => showScreen('salesScreen'));
   document.getElementById('toStockBtn')?.addEventListener('click', () => showScreen('stockScreen'));
   document.getElementById('toReportsBtn')?.addEventListener('click', () => showScreen('reportsScreen'));
-
   document.getElementById('backFromSalesBtn')?.addEventListener('click', () => showScreen('homeScreen'));
   document.getElementById('backFromStockBtn')?.addEventListener('click', () => showScreen('homeScreen'));
   document.getElementById('backFromReportsBtn')?.addEventListener('click', () => showScreen('homeScreen'));
-
   document.getElementById('addSaleBtn')?.addEventListener('click', addSale);
   document.getElementById('addStockBtn')?.addEventListener('click', addStock);
 
-  // Render inicial da tela login
   showScreen('loginScreen');
 
   // Partículas
   if (window.particlesJS) {
     particlesJS("particles-js", {
       particles: {
-        number: { value: 160, density: { enable: true, value_area: 800 } },
+        number: { value: 133, density: { enable: true, value_area: 710 } },
         color: { value: "#ffffff" },
         shape: { type: "circle" },
-        opacity: { value: 1, random: true },
+        opacity: { value: 0.5 },
         size: { value: 3, random: true },
-        line_linked: { enable: false },
-        move: { enable: true, speed: 1, random: true }
+        line_linked: { enable: true, distance: 150, color: "#ffffff", opacity: 0.4, width: 1 },
+        move: { enable: true, speed: 6, out_mode: "out" }
       },
       interactivity: {
-        events: { onhover: { enable: true, mode: "bubble" }, onclick: { enable: true, mode: "repulse" } }
+        events: { onhover: { enable: true, mode: "repulse" }, onclick: { enable: true, mode: "push" } },
       },
-      retina_detect: true
+      retina_detect: false
     });
   }
 
-  // Stats (opcional, não quebra se não carregar)
+  // Stats
   try {
     const stats = new Stats();
     stats.showPanel(0);
-    stats.dom.style.position = 'absolute';
-    stats.dom.style.left = '0px';
-    stats.dom.style.top = '0px';
-    document.body.appendChild(stats.dom);
+    stats.domElement.style.position = 'absolute';
+    stats.domElement.style.left = '0px';
+    stats.domElement.style.top = '0px';
+    document.body.appendChild(stats.domElement);
 
     const count_particles = document.querySelector('.js-count-particles');
     function update() {
@@ -195,7 +162,5 @@ document.addEventListener('DOMContentLoaded', () => {
       requestAnimationFrame(update);
     }
     requestAnimationFrame(update);
-  } catch (e) {
-    console.warn("Stats.js não carregado.");
-  }
+  } catch (e) {}
 });
