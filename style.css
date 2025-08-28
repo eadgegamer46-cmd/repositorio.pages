@@ -1,3 +1,6 @@
+/* Importar Roboto */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
 /* Tema preto + cinza claro, layout simples e robusto */
 :root {
   --bg: #121212;
@@ -20,18 +23,18 @@ html, body {
 }
 
 body {
-  font-family: 'Poppins', Arial, Helvetica, sans-serif;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
   background: var(--bg);
   color: var(--text);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 24px;
-  overflow: hidden; /* evita scroll desnecessário com partículas */
+  overflow: hidden;
 }
 
 .container {
-  background: var(--card);
+  background: rgba(30, 30, 30, 0.8); /* leve transparência */
   width: min(540px, 100%);
   max-width: 90%;
   border: 1px solid var(--border);
@@ -39,12 +42,18 @@ body {
   padding: 24px;
   box-shadow: 0 10px 30px rgba(0,0,0,.35);
   position: relative;
-  z-index: 1; /* fica acima das partículas */
+  z-index: 1;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  text-align: center; /* centralizar conteúdo */
 }
 
 h1, h2 {
   margin: 0 0 16px;
   font-weight: 600;
+}
+
+input, button, ul, p, span {
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
 
 input {
@@ -95,6 +104,7 @@ button.secondary {
 ul {
   margin: 10px 0 0 0;
   padding-left: 18px;
+  text-align: left;
 }
 
 .hidden {
@@ -106,11 +116,8 @@ ul {
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: #000000;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  z-index: -1; /* fica no fundo */
+  background-color: #000a2d;
+  z-index: -1;
 }
 
 /* ---- stats.js ---- */
@@ -126,7 +133,7 @@ ul {
   text-indent: 4px;
   line-height: 14px;
   padding-bottom: 2px;
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: 'Roboto', Helvetica, Arial, sans-serif;
   font-weight: bold;
 }
 
@@ -148,3 +155,4 @@ ul {
 .count-particles {
   border-radius: 0 0 3px 3px;
 }
+
